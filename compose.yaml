@@ -1,0 +1,23 @@
+services:
+  oracle:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jeopardy-oracle
+    environment:
+      ORACLE_PASSWORD: oracle
+      APP_USER: jeopardy
+      APP_USER_PASSWORD: jeopardy
+    ports:
+      - "1521:1521"
+    volumes:
+      - jeopardy-oradata:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+
+volumes:
+  jeopardy-oradata:
