@@ -36,7 +36,11 @@ end;
    ============================================================ */
 declare
   l_game_id     number;
-  l_question_id number := 1;   -- << change this for each new question
+  l_question_id number := 2;   -- << change this for each new question
+  l_option_a    jq_question.option_a%type;
+  l_option_b    jq_question.option_b%type;
+  l_option_c    jq_question.option_c%type;
+  l_option_d    jq_question.option_d%type;
 begin
   dbms_output.put_line('Demo 2');
   select max(game_id)
@@ -46,6 +50,16 @@ begin
 
   select_question(l_game_id, l_question_id);
   dbms_output.put_line(current_question(l_game_id));
+
+  select option_a, option_b, option_c, option_d
+  into   l_option_a, l_option_b, l_option_c, l_option_d
+  from   jq_question
+  where  question_id = l_question_id;
+
+  dbms_output.put_line('A: ' || l_option_a);
+  dbms_output.put_line('B: ' || l_option_b);
+  dbms_output.put_line('C: ' || l_option_c);
+  dbms_output.put_line('D: ' || l_option_d);
 end;
 
 /* ============================================================
