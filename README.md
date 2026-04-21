@@ -1,10 +1,12 @@
 # Jeopardy PL/SQL Backend
 
+Team: Lukas Eschbacher, Hannah Fluch, Severin Gal
+
 Dieses Projekt implementiert ein Oracle PL/SQL Backend fuer eine TV-Quizshow im Stil von **Jeopardy**.
 
 ## How to Run
 
-### Podman (oder Docker) / Oracle Container
+### Podman (oder Docker) Container
 
 Zum lokalen Testen mit DBeaver kann eine Oracle Free Datenbank per Podman gestartet werden.
 Beim ersten Start wird automatisch ein Schema `JEOPARDY` erstellt. Die Projekt-Skripte werden
@@ -13,6 +15,8 @@ danach in DBeaver ausgefuehrt, damit Ablauf, Fehler und spontane Aenderungen sic
 ```sh
 podman compose up --build -d
 ```
+
+Für docker-user kann statt `podman compose` auch `docker compose` verwendet werden.
 
 DBeaver-Verbindung:
 
@@ -43,3 +47,8 @@ Wenn die Datenbank komplett neu erstellt werden soll, Container und Volume loesc
 podman compose down -v
 podman compose up --build -d
 ```
+
+## Learnings about the use of AI:
+- overcomplicated logic: complicated subqueries, a bunch of loops, `execute immediate` overused, ...
+- logic inaccuracies: e.g.: would describe logic of round-point-distribution via comment but not actually add the constraint to check
+- sqlplus: AI used special syntax for sqlplus a lot, which did not work in dbeaver ;(
