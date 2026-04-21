@@ -2,20 +2,7 @@
 
 Dieses Projekt implementiert ein Oracle PL/SQL Backend fuer eine TV-Quizshow im Stil von **Jeopardy**.
 
-## Dateien
-
-- `Dockerfile` - Oracle Free Image fuer lokale Tests
-- `compose.yaml` - Podman Compose Setup mit Portfreigabe fuer DBeaver
-- `sql/00_drop.sql` - entfernt alle Projektobjekte in sinnvoller Reihenfolge
-- `sql/01_schema.sql` - DDL fuer Tabellen, Constraints, Checks, Foreign Keys und Unique Constraints
-- `sql/02_routines.sql` - Spiellogik mit standalone Procedures und Functions
-- `sql/03_triggers.sql` - Trigger fuer Logging und Datenregeln
-- `sql/04_seed.sql` - Stammdaten und Beispiel-Fragen
-- `sql/05_demo.sql` - kurzer Standard-Spielverlauf zum Vorzeigen
-- `sql/06_live_demo.sql` - interaktiver Demo-Ablauf mit editierbaren Variablen
-- `docs/presentation.md` - Use Cases, Demo-Ablauf und Code-Deep-Dive Notizen
-
-## Ausfuehren
+## How to Run
 
 ### Podman (oder Docker) / Oracle Container
 
@@ -44,7 +31,8 @@ Dann die Projektdateien in DBeaver als SQL Script in dieser Reihenfolge ausfuehr
 3. `sql/02_routines.sql`
 4. `sql/03_triggers.sql`
 5. `sql/04_seed.sql`
-6. `sql/05_demo.sql` fuer den festen Demo-Ablauf
+6. `sql/05_demo.sql`
+7. `sql/07_reset_data.sql` to reset the state back to empty schema
 
 Fuer Live-Fragen waehrend der Praesentation danach einzelne Bloecke aus `sql/06_live_demo.sql`
 ausfuehren.
@@ -55,14 +43,3 @@ Wenn die Datenbank komplett neu erstellt werden soll, Container und Volume loesc
 podman compose down -v
 podman compose up --build -d
 ```
-
-## Enthaltene Anforderungen
-
-- DDL mit Primary Keys, Foreign Keys, Unique Constraints und Check Constraints
-- Gewinnstufen/Point Levels als eigene Tabelle fuer Jeopardy-Werte
-- Procedures fuer Spielfluss: Spiel anlegen, Kandidaten anmelden, Spiel starten, Frage waehlen, buzzern, antworten, Joker verwenden
-- Functions fuer Rueckgabewerte: Score, Leaderboard, schnellster Kandidat, aktuelle Frage, Joker-Hinweis
-- Trigger fuer Audit-Logging und Validierung
-- Eigene Fehler mit `raise_application_error`
-- Demo-Spielverlauf inklusive Buzz-in: schnellste Antwort zaehlt
-- Jeopardy-spezifische Punkte-Logik mit positiven und negativen Punkten
